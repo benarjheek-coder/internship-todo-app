@@ -30,6 +30,7 @@ const registerUser = async (req, res) => {
       res.status(400).json({ message: 'Invalid user data' });
     }
   } catch (error) {
+    console.error('Registration error details:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -44,6 +45,7 @@ const loginUser = async (req, res) => {
       res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (error) {
+    console.error('Login error details:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -54,6 +56,7 @@ const getMe = async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.json(buildUserResponse(user, null));
   } catch (error) {
+    console.error('GetMe error details:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
